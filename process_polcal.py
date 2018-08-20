@@ -266,10 +266,6 @@ BASEDIR=<BASESTR>
 cd $BASEDIR
 . /home/canderson/pipelines/0.15.1/bin/utils.sh
 
-#Kill existing leakage parsets --- wedohnwannemthere
-mkdir -p ./script_io/awdleakparsets
-mv ./script_io/parset_leakages.b* ./script_io/awdleakparsets/
-
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
 
