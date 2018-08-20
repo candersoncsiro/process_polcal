@@ -12,6 +12,8 @@ import numpy as np
 import pyrap.tables as pt
 from subprocess import call
 import argparse
+import os
+import sys
 
 def main(args):
 
@@ -97,7 +99,7 @@ def main(args):
 								L12LeakPhaseCorrectionMultiplierStor = L12LeakPhaseCorrectionMultiplier
 								L12LeakPhaseCorrectionAngle = np.angle(L12Leak/np.abs(L12Leak),deg=True)
 								L12LeakPhaseCorrectionAngleStor = L12LeakPhaseCorrectionAngle
-							 except:
+							except:
 								L12LeakPhaseCorrectionMultiplier = L12LeakPhaseCorrectionMultiplierStor
 								L12LeakPhaseCorrectionAngle = L12LeakPhaseCorrectionAngleStor
 						#If the calibration solution in question relates to the YX leakage of the rotated ant, do as above.
@@ -115,8 +117,12 @@ def main(args):
 								L21LeakPhaseCorrectionAngle = L21LeakPhaseCorrectionAngleStor
 						else:
 							pass
-			except:
-				print('Exception for channel'+chanStr)
+			except Exception as e:
+                                exc_type, exc_obj, exc_tb = sys.exc_info()
+                                fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                                print('Exception for channel '+chanStr)
+                                print('Type, filename, line no.:')
+                                print(exc_type, fname, exc_tb.tb_lineno)
 				L12LeakPhaseCorrectionMultiplier = L12LeakPhaseCorrectionMultiplierStor
 				L21LeakPhaseCorrectionMultiplier = L21LeakPhaseCorrectionMultiplierStor
 
