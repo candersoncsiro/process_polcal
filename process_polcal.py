@@ -54,10 +54,10 @@ def main(args):
 		os.mkdir(baseDir+'script_io')
 
 	if not os.path.isdir(baseDir+'script_io/POLCAL/'):
-		 os.mkdir(baseDir+'script_io/POLCAL/')
+		os.mkdir(baseDir+'script_io/POLCAL/')
 
-	if not os.path.isdir(baseDir+'slurmFiles/POLCAL/logFiles'):
-		 os.mkdir(baseDir+'slurmFiles/POLCAL/logFiles')
+	if not os.path.isdir(baseDir+'script_io/POLCAL/logFiles'):
+		os.mkdir(baseDir+'script_io/POLCAL/logFiles')
 
 	if not os.path.isdir(baseDir+'slurmFiles/POLCAL'):
 		os.mkdir(baseDir+'slurmFiles/POLCAL/')
@@ -202,7 +202,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -234,7 +234,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./BPCAL/1934_SB<SB1934STR>_beam${BEAM_ID}_apply.ms
 """
 
 	with open(baseDir+'slurmFiles/POLCAL/apply_bandpass_1934.sbatch','wb') as f:
@@ -264,7 +263,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -379,7 +378,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -450,7 +449,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -482,7 +481,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./BPCAL/1934_SB<SB1934STR>_beam${BEAM_ID}_postXYapply.ms
 """
 
 	with open(baseDir+'slurmFiles/POLCAL/apply_bandpass_1934_postxy.sbatch','wb') as f:
@@ -514,7 +512,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -546,7 +544,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>.beam${BEAM_ID}.ms
 """
 			if makeCopies==off:
 				copyString = 'cp -Trv ./<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>.beam${BEAM_ID}.ms ./<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>.beam${BEAM_ID}_preBPapply.ms'
@@ -579,7 +576,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -611,7 +608,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./<FIELDSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>.beam${BEAM_ID}.ms
 """
 
 			if makeCopies==off:
@@ -647,7 +643,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -712,7 +708,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -742,7 +738,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>_T<RIDICULOUSSTR><INTERSTR>.beam${BEAM_ID}.ms
 """ 
 
 			if makeCopies==off:
@@ -776,7 +771,7 @@ module load askapdata
 
 BASEDIR=<BASESTR>
 cd $BASEDIR
-. /home/canderson/pipelines/0.15.1/bin/utils.sh
+
 
 #Get the beam identifier string
 BEAM_ID=`printf %02d ${SLURM_ARRAY_TASK_ID}` #Pad with leading zeros to a total of two integers
@@ -806,7 +801,6 @@ NPPN=1
 srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalapply -c $parset > $log
 err=$?
 
-rejuvenate ./<FIELDSTR>/scienceData_SB<SBSCIENCESTR>_<FIELDSTR>.beam${BEAM_ID}.ms
 """ 
 
 			if makeCopies==off:
