@@ -1049,7 +1049,7 @@ ap.add_argument('ridiculousStr',help='The ridiculous string that is included in 
 ap.add_argument('fieldName',help='The name of the field, as recorded in the OMP and metadata (e.g. <FIELDSTR>)')
 ap.add_argument('interleavesList',help='A comma-separated list of interleaves to apply the polarisation calibration to (e.g. A,B). If interleaving was not used, use N.')
 ap.add_argument('--rotAnt','-r',help='Antenna index corresponding to rotated PAF [default 0]',default=0,type=int)
-ap.add_argument('--rotSens','-s',help='The sense of the rotation of the rotated PAF [counterclockwise=-1, clockwise=1; default -1]',default=-1,type=int)
+ap.add_argument('--rotSens','-s',help='The sense of the rotation of the rotated PAF [counterclockwise=-1, clockwise=1; default 1]',default=1,type=int)
 ap.add_argument('--nAnt','-n',help='Number of antennas in the array for the observations [default 12]',default=12,type=int)
 ap.add_argument('--nChan','-c',help='Number of 1 MHz channels across the full bandwidth for the observations [default 240]',default=240,type=int)
 ap.add_argument('--nBeams','-b',help='Number of formed beams in the observations [default 36]',default=36,type=int)
