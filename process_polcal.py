@@ -92,7 +92,7 @@ def main(args):
 		#Now clean out the interleave folders, and restore the split out science data
 		for interleave in interleavesList:
 			if 'N' not in interleavesList:
-				os.chdir(baseDir+fieldName+'_T<RIDICULOUSSTR>'+interleave)
+				os.chdir(baseDir+fieldName+'_T<RIDICULOUSSTR>'+interleave.replace('<RIDICULOUSSTR>',str(ridiculousStr)))
 			else:
 				os.chdir(baseDir+fieldName)
 			if not glob.glob('./*_preBPapply*'):
