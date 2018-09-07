@@ -116,30 +116,30 @@ def main(args):
 				shutil.move(ms,ms.replace('_preBPapply',''))  
 						  ##Check for/create necessary dirs
 
-				#Re-create directories if need be
-				if not os.path.isdir(baseDir+'slurmFiles'):
-						raise OSError('The slurmFiles subdir does not exist! Have you run processASKAP yet? Note that the polcal pipeline requires that the 1934 and science data have been split out, and that an initial bandpass calibration has been performed!')
+		#Re-create directories if need be
+		if not os.path.isdir(baseDir+'slurmFiles'):
+				raise OSError('The slurmFiles subdir does not exist! Have you run processASKAP yet? Note that the polcal pipeline requires that the 1934 and science data have been split out, and that an initial bandpass calibration has been performed!')
 
-				if not os.path.isdir(baseDir+'script_io'):
-						os.mkdir(baseDir+'script_io')
+		if not os.path.isdir(baseDir+'script_io'):
+				os.mkdir(baseDir+'script_io')
 
-				if not os.path.isdir(baseDir+'script_io/POLCAL/'):
-						os.mkdir(baseDir+'script_io/POLCAL/')
+		if not os.path.isdir(baseDir+'script_io/POLCAL/'):
+				os.mkdir(baseDir+'script_io/POLCAL/')
 
-				if not os.path.isdir(baseDir+'script_io/POLCAL/logFiles'):
-						os.mkdir(baseDir+'script_io/POLCAL/logFiles')
+		if not os.path.isdir(baseDir+'script_io/POLCAL/logFiles'):
+				os.mkdir(baseDir+'script_io/POLCAL/logFiles')
 
-				if not os.path.isdir(baseDir+'slurmFiles/POLCAL'):
-						os.mkdir(baseDir+'slurmFiles/POLCAL/')
+		if not os.path.isdir(baseDir+'slurmFiles/POLCAL'):
+				os.mkdir(baseDir+'slurmFiles/POLCAL/')
 
-				if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmOutput'):
-						os.mkdir(baseDir+'slurmFiles/POLCAL/slurmOutput')
+		if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmOutput'):
+				os.mkdir(baseDir+'slurmFiles/POLCAL/slurmOutput')
 
-				if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmInput'):
-						os.mkdir(baseDir+'slurmFiles/POLCAL/slurmInput')
+		if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmInput'):
+				os.mkdir(baseDir+'slurmFiles/POLCAL/slurmInput')
 
-				if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmError'):
-						os.mkdir(baseDir+'slurmFiles/POLCAL/slurmError')
+		if not os.path.isdir(baseDir+'slurmFiles/POLCAL/slurmError'):
+				os.mkdir(baseDir+'slurmFiles/POLCAL/slurmError')
 
 	else:
 		print ''
