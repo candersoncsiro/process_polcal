@@ -43,8 +43,20 @@ def main(args):
 	doLeakPlots = args.doLeakPlots
 	makeCopies = args.makeCopies
 
+	#Fix sloppy directory naming
 	if baseDir[-1]!='/':
 		baseDir = baseDir+'/'
+	
+	#Double-check with the user about a potentially dangerous state of affairs (could lose all work from previous runs)
+	if cleanUp:
+		print('\n\n**IMPORTANT**: Before running with the cleanup option, be sure that measurements sets with \"_preBPapply.ms\"-type names are located in the <FIELDSTR>_T<RIDICULOUSSTR><INTERSTR> folder, or clean-up will fail, and previous progress may be lost!!\n\n')
+		ans1 = raw_input('Confirm that you are happy to proceed (Y/N): ')
+		if str(ans1).upper():
+			print('OK --- proceeding!\n')
+			continue
+		else:
+			print('You\'re right --- best to check. Exiting pipeline.')
+			exit() 
 
 	##Check for/create necessary dirs
 	if not os.path.isdir(baseDir+'slurmFiles'):
