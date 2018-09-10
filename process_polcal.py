@@ -51,7 +51,7 @@ def main(args):
 	if cleanUp:
 		print('\n\n**IMPORTANT**: Before running with the cleanup option, be sure that measurements sets with \"_preBPapply.ms\"-type names are located in the <FIELDSTR>_T<RIDICULOUSSTR><INTERSTR> folder, or clean-up will fail, and previous progress may be lost!!\n\n'.replace('<BASESTR>',str(baseDir)).replace('<SB1934STR>',str(sb1934)).replace('<SBSCIENCESTR>',str(sbScience)).replace('<RIDICULOUSSTR>',str(ridiculousStr)).replace('<FIELDSTR>',str(fieldName)).replace('<FIELDSTRSHORT>',str(fieldName)[0:3]).replace('<ROTANTSTR>',str(rotAnt)).replace('<ROTSENSSTR>',str(rotSens)).replace('<NANTSTR>',str(nAnt)).replace('<NCHANSTR>',str(nChan)).replace('<MAILSTR>',str(mailTo)))
 		ans1 = raw_input('Confirm that you are happy to proceed (Y/N): ')
-		if str(ans1).upper():
+		if str(ans1).upper()=='Y':
 			print('OK --- proceeding!\n')
 			continue
 		else:
