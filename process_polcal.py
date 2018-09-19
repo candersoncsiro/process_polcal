@@ -49,6 +49,10 @@ def main(args):
 	cleanUp = args.clean_up
 	doLeakPlots = args.doLeakPlots
 	makeCopies = args.makeCopies
+	if args.reservation == '__NONE__':
+		rstr = ''
+	else:
+		rstr = '\n#SBATCH --reservation='+args.reservation+'\n'
 
 	#Fix sloppy directory naming
 	if baseDir[-1]!='/':
@@ -60,7 +64,7 @@ def main(args):
 		ans1 = raw_input('Confirm that you are happy to proceed (Y/N): ')
 		if str(ans1).upper()=='Y':
 			print('OK --- proceeding!\n')
-			continue
+			#continue
 		else:
 			print('You\'re right --- best to check. Exiting pipeline.')
 			exit() 
@@ -213,7 +217,7 @@ def main(args):
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/bpapply_1934_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/bpapply_1934_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -272,7 +276,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/calibonaxis_leakages_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/calibonaxis_leakages_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 #^^The array should refer to the beam indexes
 
@@ -346,7 +350,7 @@ done
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/flag_bad_polcal_channels_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/flag_bad_polcal_channels_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -387,7 +391,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/calibonaxis_leakages_postXY_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/calibonaxis_leakages_postXY_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 #^^The array should refer to the beam indexes
 
@@ -460,7 +464,7 @@ done
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/bpapply_1934_postXY_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/bpapply_1934_postXY_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -523,7 +527,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/bpapply_sci_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/bpapply_sci_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -587,7 +591,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/bpapply_sci_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/bpapply_sci_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -652,7 +656,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/calibonaxis_findepleakages_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/calibonaxis_findepleakages_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 #^^The array should refer to the beam indexes
 
@@ -719,7 +723,7 @@ srun --export=ALL --ntasks=${NCORES} --ntasks-per-node=${NPPN} ccalibrator -c $p
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/applygaincalibonaxis_sci_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/applygaincalibonaxis_sci_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -782,7 +786,7 @@ err=$?
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/applygaincalibonaxis_sci_%A_%a.out
 #SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/applygaincalibonaxis_sci_%A_%a.err
-#SBATCH --array=0-"""+str(nBeam)+"""
+#SBATCH --array=0-"""+str(nBeam)+rstr+"""
 
 # Using user-defined askapsoft module
 module use /group/askap/modulefiles
@@ -843,7 +847,7 @@ err=$?
 #SBATCH --mail-type=ALL
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/calcXY_%A_%a.out
-#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/calcXY_%A_%a.err
+#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/calcXY_%A_%a.err"""+rstr+"""
 
 apply_XY_phase_to_bandpass.py <BASESTR> ./BPCAL/calparameters_1934_bp_SB<SB1934STR>.tab -a <ROTANTSTR> -n <NBEAMSTR> -b <NCHANSTR> -s <ROTSENSSTR> 
 """
@@ -867,7 +871,7 @@ apply_XY_phase_to_bandpass.py <BASESTR> ./BPCAL/calparameters_1934_bp_SB<SB1934S
 #SBATCH --mail-type=ALL
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/plotLeaksPre_%A_%a.out
-#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/plotLeaksPre_%A_%a.err
+#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/plotLeaksPre_%A_%a.err"""+rstr+"""
 
 plotLeakageParsets.py <BASESTR> -n <NANTSTR> -c <NCHANSTR> -b <NBEAMSTR> -p 0
 """
@@ -889,7 +893,7 @@ plotLeakageParsets.py <BASESTR> -n <NANTSTR> -c <NCHANSTR> -b <NBEAMSTR> -p 0
 #SBATCH --mail-type=ALL
 #SBATCH --export=NONE
 #SBATCH --output=<BASESTR>slurmFiles/POLCAL/slurmOutput/plotLeaksPost_%A_%a.out
-#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/plotLeaksPost_%A_%a.err
+#SBATCH --error=<BASESTR>slurmFiles/POLCAL/slurmError/plotLeaksPost_%A_%a.err"""+rstr+"""
 
 plotLeakageParsets.py <BASESTR> -n <NANTSTR> -c <NCHANSTR> -b <NBEAMSTR> -p 1
 """
@@ -1077,6 +1081,7 @@ ap.add_argument('--submit_jobs','-j',help='Submit sbatch jobs to galaxy? [1==sub
 ap.add_argument('--clean_up','-k',help='If you\'ve run the pipeline before on a given data set, use this option to clobber old data products before re-running.  [1==clean up, 0==leave things alone (may fail with errors); default=0] ',default=0,type=int)
 ap.add_argument('--doLeakPlots','-p',help='Do plots of the frequency-dependent leakages before and after XY-phase correction.  [1==plot, 0==do not plot); default=0] ',default=0,type=int)
 ap.add_argument('--makeCopies','-w',help='Save backup copies of the science measurement sets before applying calibrations? Note that this can dramatically increase disk usage.  [1==Make backups, 0==Do not make backups); default=0] ',default=0,type=int)
+ap.add_argument('--reservation','-R',help='Reservation name for sbatch jobs [default is to not specify one]',default='__NONE__')
 
 args = ap.parse_args()
 main(args)
