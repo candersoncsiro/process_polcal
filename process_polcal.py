@@ -9,6 +9,13 @@ been performed, and a PAF on one array antenna must have been rotated to provide
 the leakage signal required for the cal.
 """
 
+"""
+To do
+- Collect info from MSs where possible (number of antennas etc)
+- change options to boolean where possible
+- allow reservation name to be specified
+"""
+
 # Import packages
 import re
 import numpy as np
