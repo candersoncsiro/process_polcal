@@ -12,8 +12,6 @@ the leakage signal required for the cal.
 """
 To do
 - Collect info from MSs where possible (number of antennas etc)
-- change options to boolean where possible
-- allow reservation name to be specified
 """
 
 # Import packages
@@ -1077,10 +1075,10 @@ ap.add_argument('--nAnt','-n',help='Number of antennas in the array for the obse
 ap.add_argument('--nChan','-c',help='Number of 1 MHz channels across the full bandwidth for the observations [default 240]',default=240,type=int)
 ap.add_argument('--nBeams','-b',help='Number of formed beams in the observations [default 36]',default=36,type=int)
 ap.add_argument('--mailTo','-m',help='Send notifications from Galaxy to this email account',default='craig.anderson@csiro.au',type=str)
-ap.add_argument('--submit_jobs','-j',help='Submit sbatch jobs to galaxy? [1==submit, 0==generate sbatch files only; default=0] ',default=0,type=int)
-ap.add_argument('--clean_up','-k',help='If you\'ve run the pipeline before on a given data set, use this option to clobber old data products before re-running.  [1==clean up, 0==leave things alone (may fail with errors); default=0] ',default=0,type=int)
-ap.add_argument('--doLeakPlots','-p',help='Do plots of the frequency-dependent leakages before and after XY-phase correction.  [1==plot, 0==do not plot); default=0] ',default=0,type=int)
-ap.add_argument('--makeCopies','-w',help='Save backup copies of the science measurement sets before applying calibrations? Note that this can dramatically increase disk usage.  [1==Make backups, 0==Do not make backups); default=0] ',default=0,type=int)
+ap.add_argument('--submit_jobs','-j',help='Submit sbatch jobs to galaxy? [default False] ',default=False,action='store_true')
+ap.add_argument('--clean_up','-k',help='If you\'ve run the pipeline before on a given data set, use this option to clobber old data products before re-running. [default False] ',default=False,action='store_true')
+ap.add_argument('--doLeakPlots','-p',help='Do plots of the frequency-dependent leakages before and after XY-phase correction. [default False] ',default=False,action='store_true')
+ap.add_argument('--makeCopies','-w',help='Save backup copies of the science measurement sets before applying calibrations? Note that this can dramatically increase disk usage. [default False]',default=False,action='store_true')
 ap.add_argument('--reservation','-R',help='Reservation name for sbatch jobs [default is to not specify one]',default='__NONE__')
 
 args = ap.parse_args()
