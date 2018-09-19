@@ -23,6 +23,7 @@ import commands
 import os
 import shutil
 import glob
+import pyrap.tables as pt # needed to extract obs-specific info
 
 def main(args):
 
@@ -39,10 +40,7 @@ def main(args):
 	interleavesList = args.interleavesList.split(',')
 	rotAnt = args.rotAnt
 	rotSens = args.rotSens
-	nAnt = args.nAnt
-	nChan = args.nChan
 	mailTo = args.mailTo
-	nBeam = args.nBeams-1
 	submit_jobs = args.submit_jobs
 	cleanUp = args.clean_up
 	doLeakPlots = args.doLeakPlots
@@ -55,6 +53,20 @@ def main(args):
 	#Fix sloppy directory naming
 	if baseDir[-1]!='/':
 		baseDir = baseDir+'/'
+
+	ms_name = baseDir+'BPCAL/1934_SB%s_beam00.ms'%(sb1934)
+	t = pt.table(ms_name+'/ANTENNA',ack=False,readonly=True)
+	antnames = t.getcol('NAME')
+	nAnt = len(antnames)
+	t = pt.table(ms_name+'/SPECTRAL_WINDOW',ack=False,readonly=True)
+	chfreq = t.getcol('CHAN_FREQ')[0]
+	nChan = len(chfreq)/54
+	if args.nBeams == -1:
+		globlist = glob.glob(baseDir+'BPCAL/1934_SB%s_beam??.ms'%(sb1934))
+		nBeam = len(globlist)-1
+	else:
+		nBeam = args.nBeams-1
+	print 'Found: %d antennas, %d channels, and %d beams'%(nAnt,nChan,nBeam+1)
 	
 	#Double-check with the user about a potentially dangerous state of affairs (could lose all work from previous runs)
 	if cleanUp:
@@ -1071,9 +1083,9 @@ ap.add_argument('fieldName',help='The name of the field, as recorded in the OMP 
 ap.add_argument('interleavesList',help='A comma-separated list of interleaves to apply the polarisation calibration to (e.g. A,B). If interleaving was not used, use N.')
 ap.add_argument('--rotAnt','-r',help='Antenna index corresponding to rotated PAF [default 0]',default=0,type=int)
 ap.add_argument('--rotSens','-s',help='The sense of the rotation of the rotated PAF [counterclockwise=-1, clockwise=1; default 1]',default=1,type=int)
-ap.add_argument('--nAnt','-n',help='Number of antennas in the array for the observations [default 12]',default=12,type=int)
-ap.add_argument('--nChan','-c',help='Number of 1 MHz channels across the full bandwidth for the observations [default 240]',default=240,type=int)
-ap.add_argument('--nBeams','-b',help='Number of formed beams in the observations [default 36]',default=36,type=int)
+#ap.add_argument('--nAnt','-n',help='Number of antennas in the array for the observations [default 12]',default=12,type=int)
+#ap.add_argument('--nChan','-c',help='Number of 1 MHz channels across the full bandwidth for the observations [default 240]',default=240,type=int)
+ap.add_argument('--nBeams','-b',help='Number of formed beams in the observations [default is to use them all]',default=-1,type=int)
 ap.add_argument('--mailTo','-m',help='Send notifications from Galaxy to this email account',default='craig.anderson@csiro.au',type=str)
 ap.add_argument('--submit_jobs','-j',help='Submit sbatch jobs to galaxy? [default False] ',default=False,action='store_true')
 ap.add_argument('--clean_up','-k',help='If you\'ve run the pipeline before on a given data set, use this option to clobber old data products before re-running. [default False] ',default=False,action='store_true')
